@@ -1,0 +1,104 @@
+prog main;
+	var arr: array[0; 5] of int;
+	var n, i, j, k: int;
+	var currsize, leftstart, mid, rightend: int;
+	var n1, n2: int;
+	var L, R: array[0; 12] of int;
+	var temp1, temp2, temp3: int;
+begin
+	arr = {12, 11, 13, 5, 6, 7};
+	n = 6;
+
+	currsize = 1;
+	leftstart = 0;
+
+	i = 0;
+	j = 0;
+	k = 0;
+
+	while (currsize < n) do
+	{
+		while (leftstart < n-1) do
+		{
+			temp1 = leftstart + currsize - 1;
+			temp2 = leftstart + 2*currsize - 1;
+			temp3 = n-1;
+
+			if (temp1 < temp3) then
+			{
+				mid = temp1
+			}
+			else
+			{
+				mid = temp3
+			};
+
+			if (temp2 < temp3) then
+			{
+				rightend = temp2
+			}
+			else
+			{
+				rightend = temp3
+			};
+
+			n1 = mid - leftstart + 1;
+			n2 = rightend - mid;
+
+			while (i < n1) do
+			{
+				L[i] = arr[leftstart + i];
+				i = i+1
+			};
+
+			while (j < n2) do
+			{
+				R[j] = arr[mid + 1+ j];
+				j = j+1
+			};
+
+			i = 0;
+			j = 0;
+			k = leftstart;
+
+			while (i < n1 & j < n2) do
+			{
+				if (L[i] <= R[j]) then
+				{
+					arr[k] = L[i];
+					i = i+1
+				}
+				else
+				{
+					arr[k] = R[j];
+					j = j+1
+				};
+
+				k = k+1
+			};
+
+			while (i < n1) do
+			{
+				arr[k] = L[i];
+				i = i+1;
+				k = k+1
+			};
+
+			while (j < n2) do
+			{
+				arr[k] = R[j];
+				j = j+1;
+				k = k+1
+			};
+
+
+			leftstart = leftstart + 2*currsize
+		};
+
+		currsize = 2*currsize;
+		leftstart = 0
+
+	}
+
+
+end.
